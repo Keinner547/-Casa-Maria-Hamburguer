@@ -3,18 +3,20 @@ import React from 'react';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { LOCATION_INFO } from '../constants';
 import { useNavigation } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 
 const Hero: React.FC = () => {
   const { navigate } = useNavigation();
+  const { settings } = useSettings();
 
   return (
     <div className="relative bg-black overflow-hidden h-[90vh] flex items-center">
       {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1920&q=80"
+          src={settings.heroImage}
           alt="Hamburguesa Gourmet Casa María"
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover opacity-60 transition-opacity duration-1000"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
@@ -41,7 +43,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-10">
             <button
               onClick={() => navigate('/menu')}
-              className="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-full text-white bg-orange-600 hover:bg-orange-700 transition-all transform hover:-translate-y-1 shadow-lg shadow-orange-600/30"
+              className="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-full text-white bg-orange-600 hover:bg-orange-700 transition-all transform hover:-translate-y-1 shadow-lg shadow-orange-600/20"
             >
               Pedir Ahora / Ver Menú
               <ArrowRight className="ml-2 h-5 w-5" />

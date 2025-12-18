@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -14,6 +15,7 @@ import { MenuItem, CartItem } from './types';
 import { AuthProvider, useAuth, NavigationProvider, useNavigation } from './context/AuthContext';
 import { MenuProvider } from './context/MenuContext';
 import { ReviewProvider } from './context/ReviewContext';
+import { SettingsProvider } from './context/SettingsContext';
 
 // Protect Admin Routes
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -150,13 +152,15 @@ const MainContent: React.FC = () => {
 function App() {
   return (
     <AuthProvider>
-      <MenuProvider>
-        <ReviewProvider>
-          <NavigationProvider>
-            <MainContent />
-          </NavigationProvider>
-        </ReviewProvider>
-      </MenuProvider>
+      <SettingsProvider>
+        <MenuProvider>
+          <ReviewProvider>
+            <NavigationProvider>
+              <MainContent />
+            </NavigationProvider>
+          </ReviewProvider>
+        </MenuProvider>
+      </SettingsProvider>
     </AuthProvider>
   );
 }

@@ -1,83 +1,97 @@
 
 import React from 'react';
-import { MapPin, Star } from 'lucide-react';
+import { MapPin, Star, Utensils, Users } from 'lucide-react';
+import { useSettings } from '../context/SettingsContext';
 
 const About: React.FC = () => {
+  const { settings } = useSettings();
+
   return (
     <div className="bg-slate-950 py-24 overflow-hidden border-t border-slate-900 relative">
-      {/* Background decoration */}
+      {/* Elementos decorativos de fondo para resaltar el estilo nocturno */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-orange-900/5 blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-blue-900/5 blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* Columna de Imagen */}
+          {/* Columna de Imagen: Optimizada para la foto de la fachada */}
           <div className="relative order-2 lg:order-1 flex justify-center">
              
-             {/* Glow effect behind image */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] h-[105%] bg-orange-500/10 rounded-3xl blur-2xl"></div>
+             {/* Brillo suave detrás de la foto para simular la luz del local */}
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-orange-500/10 rounded-full blur-[100px] opacity-50"></div>
 
-             <div className="relative group w-full max-w-md mx-auto">
-               <img 
-                 src="/fachada.jpg" 
-                 alt="Nueva Sede Casa María Burguer" 
-                 className="relative w-full h-auto object-cover rounded-2xl shadow-2xl border-2 border-slate-800 transform transition-transform duration-500 hover:scale-[1.01] z-10"
-                 onError={(e) => {
-                   // Fallback visual por si la imagen no se ha guardado en public/ todavía
-                   const target = e.target as HTMLImageElement;
-                   target.onerror = null; 
-                   // Imagen oscura genérica de restaurante mientras subes la tuya
-                   target.src = 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=800&q=80';
-                 }}
-               />
+             <div className="relative group w-full max-w-lg mx-auto">
+               <div className="relative z-10 overflow-hidden rounded-3xl border-2 border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.5)] transform transition-transform duration-700 group-hover:scale-[1.02]">
+                 <img 
+                   src={settings.aboutImage} 
+                   alt="Fachada Casa María Burguer" 
+                   className="w-full h-auto object-cover transition-opacity duration-1000"
+                   onError={(e) => {
+                     const target = e.target as HTMLImageElement;
+                     target.onerror = null; 
+                     target.src = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80';
+                   }}
+                 />
+                 {/* Overlay para mejorar el contraste de las luces */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40"></div>
+               </div>
                
-               {/* Badge flotante animado */}
-               <div className="absolute -bottom-6 -right-6 z-20 bg-slate-900/95 backdrop-blur-md p-5 rounded-2xl border border-slate-700 shadow-xl max-w-[200px]">
+               {/* Badge flotante de 'Nueva Sede' */}
+               <div className="absolute -bottom-6 -right-6 z-20 bg-slate-900/95 backdrop-blur-md p-6 rounded-2xl border border-slate-700 shadow-2xl max-w-[220px] animate-in slide-in-from-bottom-4 duration-1000">
                  <div className="flex items-center gap-3 mb-2">
-                    <span className="flex h-3 w-3 relative">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                    </span>
-                    <span className="text-white font-bold text-sm tracking-wide">YA ABIERTO</span>
+                    <div className="bg-orange-600 p-2 rounded-lg">
+                      <Utensils size={18} className="text-white" />
+                    </div>
+                    <span className="text-white font-bold text-sm tracking-wide">NUEVA SEDE</span>
                  </div>
                  <p className="text-slate-400 text-xs leading-relaxed">
-                   Visita nuestra nueva ubicación campestre.
+                   Diseñamos un espacio mágico para que disfrutes con los que más quieres.
                  </p>
                </div>
              </div>
           </div>
 
-          {/* Columna de Texto */}
+          {/* Columna de Texto: Historia y Valor */}
           <div className="order-1 lg:order-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-900/20 text-orange-400 border border-orange-900/30 mb-6">
               <Star size={14} className="fill-current" />
-              <span className="text-xs font-bold uppercase tracking-wider">Nuestra Evolución</span>
+              <span className="text-xs font-bold uppercase tracking-wider">Tradición Familiar</span>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
-              Bienvenido a la nueva <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
-                Casa María
+              Bienvenido a nuestra <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">
+                Casa María Burguer
               </span>
             </h2>
             
-            <div className="prose prose-lg text-slate-400 space-y-6 mb-8">
-              <p>
-                Hemos crecido gracias a ti. Lo que ves en la foto es nuestro nuevo orgullo: un espacio diseñado desde los cimientos para ofrecerte la mejor experiencia.
+            <div className="prose prose-lg text-slate-400 space-y-6 mb-10">
+              <p className="text-lg leading-relaxed">
+                Lo que ves en la foto es más que un edificio; es el resultado de años de pasión por la cocina. Nuestra nueva sede ha sido creada para ofrecerte una experiencia campestre única, donde el sabor rústico y la comodidad se encuentran.
               </p>
-              <p>
-                Bajo este nuevo techo, mantenemos la tradición de nuestras hamburguesas artesanales, pero ahora con el espacio perfecto para que vengas con toda tu familia y amigos. Ambiente campestre, luces cálidas y el sabor de siempre.
+              <p className="text-slate-500">
+                Desde nuestras hamburguesas artesanales hasta nuestras refrescantes limonadas, cada detalle en <strong>Casa María</strong> está pensado para que te sientas como en casa, bajo un ambiente acogedor y lleno de vida.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-800">
-               <div className="flex items-center gap-4">
-                 <div className="bg-slate-800 p-3 rounded-lg text-orange-500">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-slate-800/60">
+               <div className="flex items-start gap-4">
+                 <div className="bg-slate-900 p-3 rounded-xl text-orange-500 border border-slate-800">
                     <MapPin size={24} />
                  </div>
                  <div>
-                   <p className="text-white font-bold">Ubicación Premium</p>
-                   <p className="text-sm text-slate-500">Fácil acceso y parqueadero</p>
+                   <p className="text-white font-bold">Ambiente Único</p>
+                   <p className="text-sm text-slate-500">Espacio abierto y familiar.</p>
+                 </div>
+               </div>
+               <div className="flex items-start gap-4">
+                 <div className="bg-slate-900 p-3 rounded-xl text-orange-500 border border-slate-800">
+                    <Users size={24} />
+                 </div>
+                 <div>
+                   <p className="text-white font-bold">Para Todos</p>
+                   <p className="text-sm text-slate-500">Perfecto para grupos grandes.</p>
                  </div>
                </div>
             </div>
