@@ -1,0 +1,7 @@
+{
+  "name": " Casa María Burguer",
+  "description": "Sitio web moderno y minimalista para Casa María Burguer con menú interactivo, pedidos en línea y asistente virtual IA.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
