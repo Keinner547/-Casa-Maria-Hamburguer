@@ -18,7 +18,8 @@ import { ReviewProvider } from './context/ReviewContext';
 import { SettingsProvider } from './context/SettingsContext';
 
 // Protect Admin Routes
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+// Explicitly define children prop using PropsWithChildren to fix TS error
+const ProtectedRoute: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const { isAdmin } = useAuth();
   const { navigate } = useNavigation();
 
@@ -33,7 +34,13 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 };
 
 // Main Layout for public pages
-const PublicLayout = ({ children, cartCount, toggleCart }: any) => (
+// Explicitly define children prop and layout props
+interface PublicLayoutProps {
+  cartCount: number;
+  toggleCart: () => void;
+}
+
+const PublicLayout: React.FC<React.PropsWithChildren<PublicLayoutProps>> = ({ children, cartCount, toggleCart }) => (
   <>
     <Header cartCount={cartCount} toggleCart={toggleCart} />
     <main className="flex-grow">{children}</main>

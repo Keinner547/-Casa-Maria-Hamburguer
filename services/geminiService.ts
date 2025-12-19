@@ -1,7 +1,6 @@
+
 import { GoogleGenAI } from "@google/genai";
 import { MENU_ITEMS } from '../constants';
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const SYSTEM_INSTRUCTION = `
 Eres 'María', la asistente virtual experta de Casa María Burguer.
@@ -22,18 +21,24 @@ export const sendMessageToGemini = async (
   message: string
 ): Promise<string> => {
   try {
-    const chat = ai.chats.create({
-      model: 'gemini-2.5-flash',
+    // Initialize GoogleGenAI right before use to ensure the correct environment variables are captured
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    
+    const response = await ai.models.generateContent({
+      model: 'gemini-3-flash-preview',
+      contents: [
+        ...history.map(h => ({
+          role: h.role,
+          parts: [{ text: h.text }],
+        })),
+        { role: 'user', parts: [{ text: message }] }
+      ],
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
       },
-      history: history.map(h => ({
-        role: h.role,
-        parts: [{ text: h.text }],
-      })),
     });
 
-    const response = await chat.sendMessage({ message });
+    // response.text is a property, not a method.
     return response.text || "¡Ups! Se me cayó la hamburguesa (error de conexión). ¿Me repites eso?";
   } catch (error) {
     console.error("Gemini Error:", error);
