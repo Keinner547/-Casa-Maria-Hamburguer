@@ -89,13 +89,12 @@ export const MENU_ITEMS: MenuItem[] = [
 ];
 
 export const LOCATION_INFO: LocationData = {
-  address: "Av. Principal, Casa María Burguer",
+  address: "CRA 22 # 9-14, frente a la U. Cooperativa, Villavicencio, Meta",
   phone: "321 313 1109",
   whatsapp: "573213131109",
   hours: [
-    "Lun - Jue: 12:00 PM - 10:00 PM",
-    "Vie - Sáb: 12:00 PM - 11:30 PM",
-    "Dom: 12:00 PM - 9:00 PM"
+    "Abierto todos los días",
+    "4:00 PM - 10:30 PM"
   ],
   mapLink: "https://maps.app.goo.gl/1Cm5o6S4ZuC5LVRm7"
 };

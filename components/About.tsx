@@ -66,12 +66,27 @@ const About: React.FC = () => {
               </span>
             </h2>
             
-            <div className="prose prose-lg text-slate-400 space-y-6 mb-10">
-              <p className="text-lg leading-relaxed">
-                Lo que ves en la foto es más que un edificio; es el resultado de años de pasión por la cocina. Nuestra nueva sede ha sido creada para ofrecerte una experiencia campestre única, donde el sabor rústico y la comodidad se encuentran.
+            <div className="text-slate-300 space-y-6 mb-10 text-lg">
+              <p className="font-bold text-orange-500 text-xl">
+                ¡🍔✨ Casa María te trae la mejor hamburguesa!
               </p>
-              <p className="text-slate-500">
-                Desde nuestras hamburguesas artesanales hasta nuestras refrescantes limonadas, cada detalle en <strong>Casa María</strong> está pensado para que te sientas como en casa, bajo un ambiente acogedor y lleno de vida.
+              <p className="leading-relaxed">
+                ¿Tienes hambre? 🤤 ¡Atrévete a probar las <span className="text-white font-bold">deliciosas hamburguesas de Casa María</span>! 🤩 Sabores únicos, ingredientes frescos 🥩🍅 y el toque especial que solo <span className="text-white font-bold">Casa María</span> puede ofrecerte. ¡No te quedes con el antojo! 😋
+              </p>
+              
+              <div className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 space-y-4">
+                <p className="flex items-start gap-3">
+                  <span className="font-bold text-white shrink-0">¿Dónde?</span>
+                  <span className="text-slate-400">📍 <span className="text-white font-bold">CRA 22 # 9-14, frente a la U. Cooperativa, Villavicencio, Meta</span>.</span>
+                </p>
+                <p className="flex items-start gap-3">
+                  <span className="font-bold text-white shrink-0">⏰ Horarios:</span>
+                  <span className="text-slate-400">🕓 Abierto todos los días de <span className="text-white font-bold">4:00 PM a 10:30 PM</span>.</span>
+                </p>
+              </div>
+
+              <p className="text-slate-400 italic">
+                ¡Ven y vive la experiencia de disfrutar una hamburguesa única! <span className="text-orange-500 font-bold">¡Te esperamos en Casa María, donde el hambre se queda en casa!</span> 🏠🍔🎉
               </p>
             </div>
 
