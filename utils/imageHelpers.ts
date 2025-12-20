@@ -2,10 +2,10 @@
 /**
  * Procesa una imagen subida:
  * 1. La redimensiona para no saturar la memoria.
- * 2. Realiza un recorte automático (Center Crop) a formato cuadrado (1:1).
- * 3. Devuelve una cadena Base64 lista para usar.
+ * 2. Realiza un recorte inteligente.
+ * 3. Devuelve una cadena Base64 optimizada.
  */
-export const processImage = (file: File): Promise<string> => {
+export const processImage = (file: File, targetWidth = 1200, targetHeight = 800): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -17,34 +17,33 @@ export const processImage = (file: File): Promise<string> => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return reject('No canvas context');
 
-        // Configuración de tamaño de salida (600x600 es excelente para web)
-        const size = 600; 
-        canvas.width = size;
-        canvas.height = size;
+        const canvasWidth = targetWidth;
+        const canvasHeight = targetHeight;
+        
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
 
-        // Lógica de "Cover" (Recorte central automático)
-        let sWidth, sHeight, sx, sy;
-        const aspect = img.width / img.height;
+        const imgAspect = img.width / img.height;
+        const canvasAspect = canvasWidth / canvasHeight;
 
-        if (aspect > 1) {
-          // Es más ancha que alta
-          sHeight = img.height;
-          sWidth = img.height; // Queremos cuadrado
-          sx = (img.width - img.height) / 2;
-          sy = 0;
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        if (imgAspect > canvasAspect) {
+          drawHeight = img.height;
+          drawWidth = img.height * canvasAspect;
+          offsetX = (img.width - drawWidth) / 2;
+          offsetY = 0;
         } else {
-          // Es más alta que ancha
-          sWidth = img.width;
-          sHeight = img.width;
-          sx = 0;
-          sy = (img.height - img.width) / 2;
+          drawWidth = img.width;
+          drawHeight = img.width / canvasAspect;
+          offsetX = 0;
+          offsetY = (img.height - drawHeight) / 2;
         }
 
-        // Dibujar en canvas (Crop & Resize)
-        ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, size, size);
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight, 0, 0, canvasWidth, canvasHeight);
 
-        // Convertir a JPEG con calidad 0.85 para balancear calidad/peso
-        resolve(canvas.toDataURL('image/jpeg', 0.85));
+        // Calidad 0.7 para asegurar que quepa en localStorage
+        resolve(canvas.toDataURL('image/jpeg', 0.7));
       };
       img.onerror = (err) => reject(err);
     };

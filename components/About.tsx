@@ -8,17 +8,13 @@ const About: React.FC = () => {
 
   return (
     <div className="bg-slate-950 py-24 overflow-hidden border-t border-slate-900 relative">
-      {/* Elementos decorativos de fondo para resaltar el estilo nocturno */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-orange-900/5 blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-blue-900/5 blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* Columna de Imagen: Optimizada para la foto de la fachada */}
           <div className="relative order-2 lg:order-1 flex justify-center">
-             
-             {/* Brillo suave detrás de la foto para simular la luz del local */}
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-orange-500/10 rounded-full blur-[100px] opacity-50"></div>
 
              <div className="relative group w-full max-w-lg mx-auto">
@@ -33,11 +29,9 @@ const About: React.FC = () => {
                      target.src = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80';
                    }}
                  />
-                 {/* Overlay para mejorar el contraste de las luces */}
                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40"></div>
                </div>
                
-               {/* Badge flotante de 'Nueva Sede' */}
                <div className="absolute -bottom-6 -right-6 z-20 bg-slate-900/95 backdrop-blur-md p-6 rounded-2xl border border-slate-700 shadow-2xl max-w-[220px] animate-in slide-in-from-bottom-4 duration-1000">
                  <div className="flex items-center gap-3 mb-2">
                     <div className="bg-orange-600 p-2 rounded-lg">
@@ -52,7 +46,6 @@ const About: React.FC = () => {
              </div>
           </div>
 
-          {/* Columna de Texto: Historia y Valor */}
           <div className="order-1 lg:order-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-900/20 text-orange-400 border border-orange-900/30 mb-6">
               <Star size={14} className="fill-current" />
@@ -111,7 +104,6 @@ const About: React.FC = () => {
                </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
