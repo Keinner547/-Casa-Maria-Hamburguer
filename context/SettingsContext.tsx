@@ -14,7 +14,8 @@ interface SettingsContextType {
 
 const DEFAULT_SETTINGS: SiteSettings = {
   heroImage: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1920&q=80',
-  aboutImage: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'
+  // Se actualiza a una imagen de fachada nocturna de alta calidad que representa la foto del usuario
+  aboutImage: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80'
 };
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
